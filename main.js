@@ -745,7 +745,12 @@ function updateSmarthomeDeviceStates(res) {
         }
         else if (native.valueMap) {
             adapter.log.debug('Get Index for value "' + cap.namespace + '.' + cap.value + '" for Smart-Home-Devices.' + deviceEntityId + '.' + stateName + ', value=' + value + ' of ' + JSON.stringify(native.valueMap));
-            value = native.valueMap.indexOf(value);
+            value = -1;
+			if(typeof native.valueMap.indexOf === "function")
+	    	{
+				value = native.valueMap.indexOf(value);
+			}
+			
             if (value === -1) return null;
         }
         value = {
